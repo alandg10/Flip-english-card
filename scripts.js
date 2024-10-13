@@ -1,3 +1,16 @@
+let phrases = [
+    ["She told me off", "Ella me regañó"],
+    ["Can I go over my test?", "Puedo repasar mi examen?"],
+    ["You are a cheater", "Eres un tramposo"],
+    // Añadir todas tus frases aquí...
+];
+
+let selectedPhrases = [];
+let currentCardIndex = 0;
+let flipped = false;
+let languageMode = 'en-es';  // Por defecto Inglés a Español
+let feedbacks = [];
+let difficultyQueue = [];  // Para repetir las difíciles
 let voices = [];
 let selectedVoice;
 
@@ -17,6 +30,28 @@ if (window.speechSynthesis.onvoiceschanged !== undefined) {
     window.speechSynthesis.onvoiceschanged = loadVoices;
 }
 
+// Para iniciar el juego con la cantidad de frases seleccionada
+function startGame(count) {
+    document.getElementById('setup-screen').style.display = 'none';
+    document.getElementById('language-screen').style.display = 'block';
+
+    if (count === 'all') {
+        selectedPhrases = phrases;
+    } else {
+        selectedPhrases = phrases.slice(0, count);
+    }
+
+    selectedPhrases = shuffle(selectedPhrases);  // Aleatorio
+}
+
+// Para configurar el modo de idioma
+function setLanguageMode(mode) {
+    languageMode = mode;
+    document.getElementById('language-screen').style.display = 'none';
+    document.getElementById('game-screen').style.display = 'block';
+    showCard();
+}
+
 // Mostrar la tarjeta actual y el botón de reproducción si es necesario
 function showCard() {
     const phraseElement = document.getElementById('phrase');
@@ -27,11 +62,11 @@ function showCard() {
     const flipButton = document.getElementById('flip-button');
 
     if (languageMode === 'en-es') {
-        phraseElement.textContent = phrase[0];
+        phraseElement.textContent = phrase[0];  // Mostrar inglés
         flipButton.style.display = 'inline';  // Mostrar botón flip
         showVoiceButton();  // Mostrar botón de voz si es en inglés
     } else if (languageMode === 'es-en') {
-        phraseElement.textContent = phrase[1];
+        phraseElement.textContent = phrase[1];  // Mostrar español
         flipButton.style.display = 'inline';
         hideVoiceButton();  // Ocultar botón de voz si es en español
     } else {
@@ -68,28 +103,7 @@ function flipCard() {
     }
 }
 
-// Mostrar el botón de reproducción de voz
-function showVoiceButton() {
-    const voiceButton = document.getElementById('voice-button');
-    voiceButton.style.display = 'inline';
-}
-
-// Ocultar el botón de reproducción de voz
-function hideVoiceButton() {
-    const voiceButton = document.getElementById('voice-button');
-    voiceButton.style.display = 'none';
-}
-
-// Reproducir la voz en inglés
-function playAudio(text) {
-    if (!selectedVoice) {
-        console.error('No hay voces disponibles.');
-        return;
-    }
-
-    const msg = new SpeechSynthesisUtterance();
-    msg.text = text;
-    msg.lang = 'en-US';
-    msg.voice = selectedVoice;
-    window.speechSynthesis.speak(msg);
-}
+// Barra de progreso
+function updateProgress() {
+    const progress = ((currentCardIndex + 1) / selectedPhrases.length) * 100;
+    document.getElementById('progress-bar
