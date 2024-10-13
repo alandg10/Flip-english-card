@@ -3,36 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego de Flip Cards</title>
+    <title>Juego de Flip Cards Mejorado</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Juego de Frases en Inglés</h1>
-    <div class="card-container">
-        <div class="flip-card">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <p>She told me off</p>
-                </div>
-                <div class="flip-card-back">
-                    <p>Ella me regañó</p>
-                    <button onclick="playAudio('She told me off')">Escuchar</button>
-                </div>
-            </div>
-        </div>
+    <div id="setup-screen">
+        <h1>¿Cuántas frases quieres repasar?</h1>
+        <button onclick="startGame(10)">10 frases</button>
+        <button onclick="startGame(50)">50 frases</button>
+        <button onclick="startGame('all')">Todas las frases</button>
+    </div>
 
-        <div class="flip-card">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <p>Can I go over my test?</p>
-                </div>
-                <div class="flip-card-back">
-                    <p>Puedo repasar mi examen?</p>
-                    <button onclick="playAudio('Can I go over my test?')">Escuchar</button>
-                </div>
+    <div id="language-screen" style="display: none;">
+        <h1>¿Cómo quieres practicar?</h1>
+        <button onclick="setLanguageMode('en-es')">Inglés a Español</button>
+        <button onclick="setLanguageMode('es-en')">Español a Inglés</button>
+        <button onclick="setLanguageMode('mix')">Mix</button>
+    </div>
+
+    <div id="game-screen" style="display: none;">
+        <div id="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+        <div id="card">
+            <p id="phrase"></p>
+            <button id="flip-button" onclick="flipCard()">Voltear</button>
+            <div id="feedback-buttons" style="display: none;">
+                <button onclick="giveFeedback('easy')">Fácil</button>
+                <button onclick="giveFeedback('medium')">Más o menos</button>
+                <button onclick="giveFeedback('hard')">No recuerdo</button>
             </div>
         </div>
-        <!-- Añadir más tarjetas aquí -->
+        <div id="navigation-buttons">
+            <button onclick="prevCard()">Anterior</button>
+            <button onclick="nextCard()">Siguiente</button>
+        </div>
     </div>
 
     <script src="scripts.js"></script>
