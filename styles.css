@@ -30,3 +30,17 @@ body {
     padding: 10px;
     font-size: 16px;
 }
+
+#voice-button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+#voice-button:hover {
+    background-color: #555;
+}
