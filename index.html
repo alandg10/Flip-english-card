@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Pantalla de configuración inicial -->
     <div id="setup-screen">
         <h1>¿Cuántas frases quieres repasar?</h1>
         <button onclick="startGame(10)">10 frases</button>
@@ -14,6 +15,7 @@
         <button onclick="startGame('all')">Todas las frases</button>
     </div>
 
+    <!-- Pantalla de selección de idioma -->
     <div id="language-screen" style="display: none;">
         <h1>¿Cómo quieres practicar?</h1>
         <button onclick="setLanguageMode('en-es')">Inglés a Español</button>
@@ -21,6 +23,7 @@
         <button onclick="setLanguageMode('mix')">Mix</button>
     </div>
 
+    <!-- Pantalla del juego -->
     <div id="game-screen" style="display: none;">
         <div id="progress-container">
             <div id="progress-bar"></div>
@@ -41,6 +44,12 @@
             <button onclick="nextCard()">Siguiente</button>
         </div>
     </div>
+
+    <!-- Cargar el archivo JavaScript -->
+    <script src="scripts.js"></script>
+</body>
+</html>
+
 
     <script src="scripts.js"></script>
 </body>
